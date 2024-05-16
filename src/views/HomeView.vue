@@ -3,16 +3,17 @@
     <h3>Home</h3>
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        <p>{{ project.title }}</p>
+        <SingleProject :project="project" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SingleProject from "../components/singleProject.vue";
 export default {
   name: "HomeView",
-  components: {},
+  components: { SingleProject },
   data() {
     return {
       projects: [],
