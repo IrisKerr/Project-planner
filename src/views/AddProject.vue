@@ -1,9 +1,9 @@
 <template>
   <form @submit="handleSubmit">
     <label for="title">Title:</label>
-    <input type="text" v-model="title" required />
+    <input type="text" v-model="title" id="title" required />
     <label for="details">Details:</label>
-    <textarea v-model="details" required></textarea>
+    <textarea v-model="details" id="details" required></textarea>
     <button>Add Project</button>
   </form>
 </template>
@@ -18,7 +18,22 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.title, this.details);
+      let project = {
+        title: this.title,
+        details: this.details,
+        complete: false,
+      };
+      fetch("http://localhost:3000/projects/", {
+        method: "POST",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify(project),
+      })
+        .then(() => {
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     },
   },
 };
