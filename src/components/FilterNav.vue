@@ -20,10 +20,11 @@
 
 <script>
 export default {
+  name: "FilterNav",
   props: ["current"],
   methods: {
-    updateFilter(task) {
-      this.$emit("filterChange", task);
+    updateFilter(by) {
+      this.$emit("filterChange", by);
     },
   },
 };
